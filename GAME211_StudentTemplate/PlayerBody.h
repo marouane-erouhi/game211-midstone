@@ -14,6 +14,8 @@
 
 class PlayerBody : public Body
 {
+private:
+    float maxSpeed = 3.0f;
 protected:
     class GameManager* game;
 
