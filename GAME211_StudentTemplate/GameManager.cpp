@@ -77,7 +77,7 @@ bool GameManager::OnCreate() {
 
 /// Here's the whole game loop
 void GameManager::Run() {
-    
+
 	timer->Start();
     
 	while (isRunning) {
@@ -121,6 +121,9 @@ void GameManager::handleEvents()
                 break;
             case SDL_SCANCODE_DELETE:
                 isRunning = false;
+                break;
+            case SDL_SCANCODE_GRAVE:
+                debug = !debug;
                 break;
             case SDL_SCANCODE_1:
                 LoadScene(1);

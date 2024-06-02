@@ -23,6 +23,7 @@ private:
 	class Timer *timer;
 	bool isRunning;
 	class Scene *currentScene;
+	bool debug = true;
 
 	// This might be unfamiliar
     class PlayerBody *player;
@@ -46,6 +47,7 @@ public:
     PlayerBody* getPlayer(){ return player; }
 	void RenderPlayer(float scale = 1.0f);
 	SDL_Renderer* getRenderer();
+	bool isDebug() { return debug; }
 
 	void Run();
     
