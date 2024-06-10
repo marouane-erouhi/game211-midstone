@@ -71,6 +71,9 @@ bool GameManager::OnCreate() {
         return false;
     }
            
+
+    Music.initMixer();
+
 	return true;
 }
 

@@ -6,6 +6,7 @@
 #include "Timer.h"
 #include "Scene.h"
 #include "PlayerBody.h"
+#include "Sound.h"
 
 
 class GameManager {
@@ -24,6 +25,8 @@ private:
 	bool isRunning;
 	class Scene *currentScene;
 	bool debug = true;
+
+	Sound Music;
 
 	// This might be unfamiliar
     class PlayerBody *player;
