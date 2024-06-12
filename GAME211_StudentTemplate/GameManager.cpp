@@ -73,6 +73,8 @@ bool GameManager::OnCreate() {
            
 
     Music.initMixer();
+    int musicType = Music.loadMusic("C:/Users/User/Documents/GitHub/game211-midstone/GAME211_StudentTemplate/FreeSounds/Dinosaur_Roar.wav");
+    Music.playMusic(musicType);
 
 	return true;
 }
