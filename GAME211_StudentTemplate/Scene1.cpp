@@ -53,7 +53,7 @@ void Scene1::Render() {
 	float scaleX = 1000 / 967;
 	float scaleY = 600 / 580;
 	// background image
-	ResourceManager::getInstance()->RenderImage(game, desertImageID);
+	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0));
 
 	// render the player
 	game->RenderPlayer(0.10f);

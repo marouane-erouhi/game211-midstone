@@ -19,5 +19,5 @@ public:
 	static ResourceManager* getInstance();
 
 	int AddImage(GameManager* game_, std::string fileName);
-	void RenderImage(GameManager* game_, int i, Vec3 scale_ = Vec3(1.0f, 1.0f, 1.0f), float orientation_ = 0.0f);
+	void RenderImage(GameManager* game_, int i, Vec3 pos_, Vec3 scale_ = Vec3(1.0f, 1.0f, 1.0f), float orientation_ = 0.0f);
 };

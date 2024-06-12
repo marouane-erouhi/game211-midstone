@@ -23,7 +23,7 @@ int ResourceManager::AddImage(GameManager* game_, std::string fileName) {
 	return textures.size() - 1;
 }
 
-void ResourceManager::RenderImage(GameManager* game_, int i, Vec3 scale_, float orientation_) {
+void ResourceManager::RenderImage(GameManager* game_, int i, Vec3 pos_, Vec3 scale_, float orientation_) {
 	SDL_Renderer* renderer = game_->getRenderer();
 	Matrix4 projectionMatrix = game_->getProjectionMatrix();
 
@@ -34,7 +34,7 @@ void ResourceManager::RenderImage(GameManager* game_, int i, Vec3 scale_, float 
 
 	// convert the position from game coords to screen coords
 
-	screenCoords = projectionMatrix * Vec3(12.5f, 7.5f, 0);
+	screenCoords = projectionMatrix * pos_;
 
 	// Scale the image, in case the .png file is too big or small
 	w = images.at(i)->w * scale_.x;
