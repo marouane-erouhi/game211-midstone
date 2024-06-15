@@ -15,7 +15,11 @@ private:
     Matrix4     inverseProjection;	// set in OnCreate()
 
 	// background
-	int desertImageID;
+	int desertImageID = 0;
+
+	// bullet
+	// gave them unique id's beacuse they would not load
+	int bulletImageID = 1;
 
 public:
 	// This constructor may be different from what you've seen before

@@ -24,7 +24,11 @@ bool Scene1::OnCreate() {
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);
 
+	// Add desert image from file
 	int desertImage = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
+
+	// add the bullet image from file
+	int bulletImage = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
 
 	// Set player image to PacMan
 	SDL_Surface* image;
@@ -50,11 +54,21 @@ void Scene1::Render() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 
-	float scaleX = 1000 / 967;
-	float scaleY = 600 / 580;
-	// background image
-	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0));
+	// Declare variables for desert's scale
+	float desertScaleX = 1000 / 967;
+	float desertScaleY = 600 / 580;
 
+	// Declare variables for the gun's scale
+	float gunScaleX = 0.04f;
+	float gunScaleY = 0.04f;
+
+	// background image
+	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
+
+	// bullet image
+	ResourceManager::getInstance()->RenderImage(game, bulletImageID, Vec3(16.0f, 7.5f, 0.0f), Vec3(gunScaleX, gunScaleY, 0.0f));
+	
+	
 	// render the player
 	game->RenderPlayer(0.10f);
 
