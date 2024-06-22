@@ -109,13 +109,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\GameDev\GameDev\IrrKlang\include;C:\GameDev\GameDev\MathLibrary\include;C:\GameDev\GameDev\MathLibraryEx\include;C:\GameDev\GameDev\OpenGL\include;C:\GameDev\GameDev\SDL\include;C:\GameDev\GameDev\Vulkan\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\GameDev\MathLibrary\include;C:\GameDev\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\GameDev\GameDev\IrrKlang\lib;C:\GameDev\GameDev\OpenGL\lib;C:\GameDev\GameDev\SDL\lib;C:\GameDev\GameDev\Vulkan\Lib32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Shell32.lib;irrKlang.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_net.lib;SDL2main.lib;vulkan-1.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\GameDev\SDL\lib;C:\GameDev\OpenGL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

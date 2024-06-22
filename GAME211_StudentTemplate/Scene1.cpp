@@ -29,6 +29,11 @@ bool Scene1::OnCreate() {
 
 	// add the bullet image from file
 	int bulletImage = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
+	bulletPos = Vec3(16.0f, 7.5f, 0.0f);
+	bullet = new Body();
+	SDL_Surface* a = IMG_Load("Art/Bullet.png");
+	bullet->setImage(a);
+	bullet->setTexture(SDL_CreateTextureFromSurface(renderer, a));
 
 	// Set player image to PacMan
 	SDL_Surface* image;
@@ -46,6 +51,7 @@ void Scene1::OnDestroy() {}
 
 void Scene1::Update(const float deltaTime) {
 
+	bullet->Update(deltaTime);
 	// Update player
 	game->getPlayer()->Update(deltaTime);
 }
@@ -66,11 +72,18 @@ void Scene1::Render() {
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
 
 	// bullet image
-	ResourceManager::getInstance()->RenderImage(game, bulletImageID, Vec3(16.0f, 7.5f, 0.0f), Vec3(gunScaleX, gunScaleY, 0.0f));
+	ResourceManager::getInstance()->RenderImage(game, bulletImageID, bullet->getPos(), Vec3(gunScaleX, gunScaleY, 0.0f));
 	
+	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
+
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	SDL_RenderDrawLine(renderer, x,y, playerScreenCoords.x, playerScreenCoords.y);
 	
 	// render the player
 	game->RenderPlayer(0.10f);
+
+	//bullet->re
 
 	SDL_RenderPresent(renderer);
 }
@@ -79,4 +92,25 @@ void Scene1::HandleEvents(const SDL_Event& event)
 {
 	// send events to player as needed
 	game->getPlayer()->HandleEvents(event);
+
+	if (event.type == SDL_MOUSEBUTTONDOWN && event.key.repeat == 0) {
+		// shoot bullet
+		//Matrix4 projectionMatrix = game_->getProjectionMatrix();
+		int x,y;
+		SDL_GetMouseState(&x, &y);
+		bulletPos.x = x;
+		bulletPos.y = y;
+
+		// screenCoords to gameCoords
+		auto inverseProjectionMatrix = MMath::inverse(game->getProjectionMatrix());
+		bulletPos = inverseProjectionMatrix * bulletPos;
+
+		Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
+
+		Vec3 dir(x-playerScreenCoords.x, y-playerScreenCoords.y,0);
+		bullet->setPos(bulletPos);
+		//bullet->vel = Vec3();
+		bullet->vel = VMath::normalize(dir) * 0.2;
+
+	}
 }

@@ -20,6 +20,8 @@ private:
 	// bullet
 	// gave them unique id's beacuse they would not load
 	int bulletImageID = 1;
+	MATH::Vec3 bulletPos;
+	Body* bullet;
 
 public:
 	// This constructor may be different from what you've seen before
