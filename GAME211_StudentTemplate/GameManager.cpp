@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Scene1.h"
+#include "ResourceManager.h"
 
 GameManager::GameManager() {
 	windowPtr = nullptr;
@@ -142,6 +143,8 @@ void GameManager::OnDestroy(){
 	if (windowPtr) delete windowPtr;
 	if (timer) delete timer;
 	if (currentScene) delete currentScene;
+    ResourceManager* instance = ResourceManager::getInstance();
+    if (instance) delete instance;
 }
 
 // This might be unfamiliar

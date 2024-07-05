@@ -16,6 +16,7 @@ class ResourceManager {
 
 public:
 	ResourceManager();
+	~ResourceManager();
 	static ResourceManager* getInstance();
 
 	int AddImage(GameManager* game_, std::string fileName);

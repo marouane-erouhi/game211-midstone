@@ -2,6 +2,18 @@
 
 ResourceManager* ResourceManager::instance = nullptr;
 
+ResourceManager::~ResourceManager(){
+	/// delete all images
+	for (auto it = textures.rbegin(); it != textures.rend(); ++it) {
+		SDL_DestroyTexture(*it);
+	}
+	textures.clear();
+	for (auto it = images.rbegin(); it != images.rend(); ++it) {
+		SDL_FreeSurface(*it);
+	}
+	images.clear();
+}
+
 ResourceManager::ResourceManager() {
 	std::cout << "Resource Manager singeleton instance created" << std::endl;
 }
