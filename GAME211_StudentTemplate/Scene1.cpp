@@ -29,10 +29,10 @@ bool Scene1::OnCreate() {
 	IMG_Init(IMG_INIT_PNG);
 
 	// Add desert image from file
-	int desertImage = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
+	desertImageID = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
 
 	// add the bullet image from file
-	int bulletImage = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
+	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
 	bulletPos = Vec3(16.0f, 7.5f, 0.0f);
 	bullet = new Body();
 	SDL_Surface* a = IMG_Load("Art/Bullet.png");

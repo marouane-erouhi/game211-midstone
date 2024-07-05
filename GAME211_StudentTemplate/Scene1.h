@@ -16,11 +16,10 @@ private:
     Matrix4     inverseProjection;	// set in OnCreate()
 
 	// background
-	int desertImageID = 0;
+	int desertImageID;
 
 	// bullet
-	// gave them unique id's beacuse they would not load
-	int bulletImageID = 1;
+	int bulletImageID;
 	MATH::Vec3 bulletPos;
 	Body* bullet;
 
