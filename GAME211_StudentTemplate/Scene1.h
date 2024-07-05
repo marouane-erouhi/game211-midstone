@@ -3,6 +3,7 @@
 
 #include <MMath.h>
 #include "Scene.h"
+#include "Mouse.h"
 
 using namespace MATH;
 class Scene1 : public Scene {
@@ -20,6 +21,10 @@ private:
 	// bullet
 	// gave them unique id's beacuse they would not load
 	int bulletImageID = 1;
+	MATH::Vec3 bulletPos;
+	Body* bullet;
+
+	Mouse mouse;
 
 public:
 	// This constructor may be different from what you've seen before
