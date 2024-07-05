@@ -1,6 +1,7 @@
 #include "Scene1.h"
 #include <VMath.h>
 #include "ResourceManager.h"
+using namespace std;
 
 Scene1::Scene1(SDL_Window* sdlWindow_, GameManager* game_){
 	window = sdlWindow_;
@@ -16,6 +17,9 @@ Scene1::~Scene1(){
 bool Scene1::OnCreate() {
 	int w, h;
 	SDL_GetWindowSize(window,&w,&h);
+
+	mouse.leftButtonDown = false;
+	mouse.rightButtonDown = false;
 
 	Matrix4 ndc = MMath::viewportNDC(w, h);
 	Matrix4 ortho = MMath::orthographic(0.0f, xAxis, 0.0f, yAxis, 0.0f, 1.0f);
@@ -51,6 +55,19 @@ void Scene1::OnDestroy() {}
 
 void Scene1::Update(const float deltaTime) {
 
+	if (mouse.leftButtonDown) {
+		Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
+		auto playerPos = game->getPlayer()->getPos();
+		Vec3 m = mouse.getGameCoords(game);
+
+		Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
+		bullet->setPos(Vec3(m.x,m.y,0.0f));
+		//bullet->vel = Vec3();
+		bullet->vel = VMath::normalize(dir) * 0.3;// speed
+	}
+
+
+
 	bullet->Update(deltaTime);
 	// Update player
 	game->getPlayer()->Update(deltaTime);
@@ -72,45 +89,21 @@ void Scene1::Render() {
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
 
 	// bullet image
-	ResourceManager::getInstance()->RenderImage(game, bulletImageID, bullet->getPos(), Vec3(gunScaleX, gunScaleY, 0.0f));
+	ResourceManager::getInstance()->RenderImage(game, bulletImageID, bullet->getPos(), Vec3(gunScaleX, gunScaleY, 100.0f));
 	
 	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
 
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-	SDL_RenderDrawLine(renderer, x,y, playerScreenCoords.x, playerScreenCoords.y);
+	SDL_RenderDrawLine(renderer, mouse.x,mouse.y, playerScreenCoords.x, playerScreenCoords.y);
 	
 	// render the player
 	game->RenderPlayer(0.10f);
-
-	//bullet->re
 
 	SDL_RenderPresent(renderer);
 }
 
 void Scene1::HandleEvents(const SDL_Event& event)
 {
-	// send events to player as needed
 	game->getPlayer()->HandleEvents(event);
+	mouse.update(event);
 
-	if (event.type == SDL_MOUSEBUTTONDOWN && event.key.repeat == 0) {
-		// shoot bullet
-		//Matrix4 projectionMatrix = game_->getProjectionMatrix();
-		int x,y;
-		SDL_GetMouseState(&x, &y);
-		bulletPos.x = x;
-		bulletPos.y = y;
-
-		// screenCoords to gameCoords
-		auto inverseProjectionMatrix = MMath::inverse(game->getProjectionMatrix());
-		bulletPos = inverseProjectionMatrix * bulletPos;
-
-		Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
-
-		Vec3 dir(x-playerScreenCoords.x, y-playerScreenCoords.y,0);
-		bullet->setPos(bulletPos);
-		//bullet->vel = Vec3();
-		bullet->vel = VMath::normalize(dir) * 0.2;
-
-	}
 }
