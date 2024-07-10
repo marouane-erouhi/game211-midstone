@@ -1,7 +1,8 @@
 #include "Bullet.h"
 
-Bullet::Bullet(unsigned int imageId_){
+Bullet::Bullet(unsigned int imageId_, float radius_){
 	body = new Body();
+	body->setRadius(radius_);
 	imageId = imageId_;
 }
 

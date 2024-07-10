@@ -1,6 +1,8 @@
 #include "Scene1.h"
 #include <VMath.h>
 #include "ResourceManager.h"
+#include "Shapes.h"
+
 using namespace std;
 
 Scene1::Scene1(SDL_Window* sdlWindow_, GameManager* game_){
@@ -49,6 +51,10 @@ void Scene1::OnDestroy() {}
 void Scene1::Update(const float deltaTime) {
 	bullet_timeSinceLastFire += deltaTime;
 
+	// check collisions
+	// player and bullets for test
+
+
 	if (mouse.leftButtonDown) {
 		if (bullet_timeSinceLastFire >= bulletCooldown) {
 			bullet_timeSinceLastFire = 0.0f;
@@ -59,7 +65,7 @@ void Scene1::Update(const float deltaTime) {
 			Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
 
 			// create bullet
-			Bullet* b = new Bullet(bulletImageID);
+			Bullet* b = new Bullet(bulletImageID, 25.0f);
 			// offset slighly infrot of the player
 			b->setPos(playerPos + VMath::normalize(dir) * 2.50f);
 			b->setDir(dir);// speed
@@ -101,6 +107,8 @@ void Scene1::Render() {
 
 	for (Bullet* bullet : bullets) {
 		bullet->Render(game);
+		auto body = bullet->getBody();
+		Shapes::DrawCircle(game, body->getPos(), body->getRadius());
 	}
 	
 	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();

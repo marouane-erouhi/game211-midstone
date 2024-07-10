@@ -9,7 +9,7 @@ class Bullet {
 	float angle = 0.0f;
 
 public:
-	Bullet(unsigned int imageId_);
+	Bullet(unsigned int imageId_, float radius_);
 	~Bullet();
 
 	void Render(GameManager* game);
@@ -17,4 +17,5 @@ public:
 	void setDir(Vec3 dir_);
 	void setPos(Vec3 pos_);
 	bool OutOfBounds(float xAxis, float yAxis);
+	Body* getBody() { return body; }
 };
