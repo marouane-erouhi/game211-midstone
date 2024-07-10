@@ -19,7 +19,7 @@ struct Mouse{
 		}
 
 		/// Mouse buttons
-		if (event.type == SDL_MOUSEBUTTONDOWN && event.key.repeat == 0) {
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
 			/// left button
 			if (event.button.button == SDL_BUTTON_LEFT) {
 				leftButtonDown = true;

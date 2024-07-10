@@ -27,3 +27,10 @@ void Bullet::setDir(Vec3 dir){
 void Bullet::setPos(Vec3 pos_){
 	body->setPos(pos_);
 }
+
+bool Bullet::OutOfBounds(float xAxis, float yAxis){
+	auto pos = body->getPos();
+	if (pos.x > xAxis || pos.x < -xAxis || pos.y > yAxis || pos.y < -yAxis)
+		return true;
+	return false;
+}

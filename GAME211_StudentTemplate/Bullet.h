@@ -5,7 +5,7 @@
 class Bullet {
 	Body* body;
 	unsigned int imageId;
-	float speed = 1.0f;
+	float speed = 3.0f;
 	float angle = 0.0f;
 
 public:
@@ -16,5 +16,5 @@ public:
 	void Update(float deltaTime_);
 	void setDir(Vec3 dir_);
 	void setPos(Vec3 pos_);
-
+	bool OutOfBounds(float xAxis, float yAxis);
 };

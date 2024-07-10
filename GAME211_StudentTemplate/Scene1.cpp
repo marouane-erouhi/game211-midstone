@@ -30,13 +30,7 @@ bool Scene1::OnCreate() {
 
 	// Add desert image from file
 	desertImageID = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
-
-	// add the bullet image from file
-	bullet = new Bullet(ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png"));
-
-	//SDL_Surface* a = IMG_Load("Art/Bullet.png");
-	//bullet->setImage(a);
-	//bullet->setTexture(SDL_CreateTextureFromSurface(renderer, a));
+	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
 
 	// Set player image to PacMan
 	SDL_Surface* image;
@@ -53,25 +47,38 @@ bool Scene1::OnCreate() {
 void Scene1::OnDestroy() {}
 
 void Scene1::Update(const float deltaTime) {
+	bullet_timeSinceLastFire += deltaTime;
 
 	if (mouse.leftButtonDown) {
-		Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
-		auto playerPos = game->getPlayer()->getPos();
-		Vec3 m = mouse.getGameCoords(game);
+		if (bullet_timeSinceLastFire >= bulletCooldown) {
+			bullet_timeSinceLastFire = 0.0f;
+			Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
+			auto playerPos = game->getPlayer()->getPos();
+			Vec3 m = mouse.getGameCoords(game);
 
-		Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
+			Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
 
-		// get the angle for the bullet, dir.y is reversed since up is negetive
-		bulletAng = std::atan2(-dir.y, dir.x) * (180.0f / M_PI);
+			// create bullet
+			Bullet* b = new Bullet(bulletImageID);
+			b->setPos(Vec3(m.x,m.y,0.0f));
+			b->setDir(dir);// speed
 
-		bullet->setPos(Vec3(m.x,m.y,0.0f));
-		//bullet->vel = Vec3();
-		bullet->setDir(dir);// speed
+			bullets.push_back(b);
+		}
 	}
 
 
+	for (int i = bullets.size() - 1; i >= 0; --i) {
+		Bullet* bullet = bullets.at(i);
+		if (bullet->OutOfBounds(xAxis, yAxis)) {
+			// destroy when out of screen bounds
+			bullets.erase(bullets.begin() + i);
+		}
+		else {
+			bullet->Update(deltaTime);
+		}
+	}
 
-	bullet->Update(deltaTime);
 	// Update player
 	game->getPlayer()->Update(deltaTime);
 }
@@ -91,8 +98,9 @@ void Scene1::Render() {
 	// background image
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
 
-	// bullet image
-	bullet->Render(game);
+	for (Bullet* bullet : bullets) {
+		bullet->Render(game);
+	}
 	
 	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
 
