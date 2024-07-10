@@ -4,6 +4,7 @@
 #include <MMath.h>
 #include "Scene.h"
 #include "Mouse.h"
+#include "Bullet.h"
 
 using namespace MATH;
 class Scene1 : public Scene {
@@ -19,9 +20,7 @@ private:
 	int desertImageID;
 
 	// bullet
-	int bulletImageID;
-	MATH::Vec3 bulletPos;
-	Body* bullet;
+	Bullet* bullet;
 
 	Mouse mouse;
 

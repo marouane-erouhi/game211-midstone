@@ -32,12 +32,11 @@ bool Scene1::OnCreate() {
 	desertImageID = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
 
 	// add the bullet image from file
-	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
-	bulletPos = Vec3(16.0f, 7.5f, 0.0f);
-	bullet = new Body();
-	SDL_Surface* a = IMG_Load("Art/Bullet.png");
-	bullet->setImage(a);
-	bullet->setTexture(SDL_CreateTextureFromSurface(renderer, a));
+	bullet = new Bullet(ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png"));
+
+	//SDL_Surface* a = IMG_Load("Art/Bullet.png");
+	//bullet->setImage(a);
+	//bullet->setTexture(SDL_CreateTextureFromSurface(renderer, a));
 
 	// Set player image to PacMan
 	SDL_Surface* image;
@@ -61,9 +60,13 @@ void Scene1::Update(const float deltaTime) {
 		Vec3 m = mouse.getGameCoords(game);
 
 		Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
+
+		// get the angle for the bullet, dir.y is reversed since up is negetive
+		bulletAng = std::atan2(-dir.y, dir.x) * (180.0f / M_PI);
+
 		bullet->setPos(Vec3(m.x,m.y,0.0f));
 		//bullet->vel = Vec3();
-		bullet->vel = VMath::normalize(dir) * 0.3;// speed
+		bullet->setDir(dir);// speed
 	}
 
 
@@ -89,7 +92,7 @@ void Scene1::Render() {
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
 
 	// bullet image
-	ResourceManager::getInstance()->RenderImage(game, bulletImageID, bullet->getPos(), Vec3(gunScaleX, gunScaleY, 100.0f));
+	bullet->Render(game);
 	
 	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
 
