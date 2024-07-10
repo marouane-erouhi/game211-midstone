@@ -74,7 +74,28 @@ bool GameManager::OnCreate() {
 
     Music.initMixer();
     int musicType = Music.loadMusic("C:/Users/User/Documents/GitHub/game211-midstone/GAME211_StudentTemplate/FreeSounds/Dinosaur_Roar.wav");
-    Music.playMusic(musicType);
+    //Music.playMusic(musicType);
+
+    SDL_Event event;
+    bool quit = false;
+    while (!quit) {
+        // Handle events
+        while (SDL_PollEvent(&event) != 0) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+            else if (event.type == SDL_KEYDOWN) {
+                // Check if the spacebar is pressed (SDLK_SPACE)
+                if (event.key.keysym.sym == SDLK_SPACE) {
+                    // Play the sound effect
+                    Music.playMusic(musicType);
+                }
+            }
+        }
+
+        // Delay to hear the sound in milliseconds (you can replace this with game loop or event handling)
+        SDL_Delay(200);
+    }
 
 	return true;
 }
