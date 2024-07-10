@@ -76,6 +76,12 @@ public:
 	// Added this as public to deal with my demo
 	// so that mouse position can be copied into a Body.
     virtual void setPos( Vec3 pos );
+    virtual void setRadius(float radius_){
+        radius = radius_;
+    }
+    virtual float getRadius() {
+        return radius;
+    }
 };
 
 #endif /* BODY_H */

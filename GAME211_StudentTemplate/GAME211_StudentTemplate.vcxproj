@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -28,6 +28,7 @@
   <ItemGroup>
     <ClInclude Include="Body.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="PlayerBody.h" />
     <ClInclude Include="ResourceManager.h" />
