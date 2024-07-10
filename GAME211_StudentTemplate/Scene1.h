@@ -23,7 +23,7 @@ private:
 	// bullet
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
-	float bulletCooldown = 0.5f;
+	float bulletCooldown = 0.25f;
 	float bullet_timeSinceLastFire = 0.0f;
 
 	Mouse mouse;

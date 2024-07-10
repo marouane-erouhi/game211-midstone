@@ -60,7 +60,8 @@ void Scene1::Update(const float deltaTime) {
 
 			// create bullet
 			Bullet* b = new Bullet(bulletImageID);
-			b->setPos(Vec3(m.x,m.y,0.0f));
+			// offset slighly infrot of the player
+			b->setPos(playerPos + VMath::normalize(dir) * 2.50f);
 			b->setDir(dir);// speed
 
 			bullets.push_back(b);
