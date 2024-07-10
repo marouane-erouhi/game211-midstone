@@ -26,7 +26,7 @@ ResourceManager* ResourceManager::getInstance(){
 	return nullptr;
 }
 
-int ResourceManager::AddImage(GameManager* game_, std::string fileName) {
+unsigned int ResourceManager::AddImage(GameManager* game_, std::string fileName) {
 	SDL_Surface* image = IMG_Load(fileName.c_str());
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(game_->getRenderer(), image);
 	images.push_back(image);
