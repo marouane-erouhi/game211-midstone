@@ -34,6 +34,9 @@ bool Scene1::OnCreate() {
 	desertImageID = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
 	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
 
+	// Add the first boss image from file
+	firstBossID = ResourceManager::getInstance()->AddImage(game, "Art/FirstBoss.png");
+
 	// Set player image to PacMan
 	SDL_Surface* image;
 	SDL_Texture* texture;
@@ -102,8 +105,16 @@ void Scene1::Render() {
 	float gunScaleX = 0.04f;
 	float gunScaleY = 0.04f;
 
+	// Declare variables for the bosses' scale
+	float firstBossX = 0.2f;
+	float firstBossY = 0.22f;
+
 	// background image
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
+
+	// first boss image 
+	ResourceManager::getInstance()->RenderImage(game, firstBossID, Vec3(17.5f, 7.5f, 0), Vec3(firstBossX, firstBossY, 0.0f));
+
 
 	for (Bullet* bullet : bullets) {
 		bullet->Render(game);

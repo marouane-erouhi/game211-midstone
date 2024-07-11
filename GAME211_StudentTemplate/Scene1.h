@@ -19,6 +19,8 @@ private:
 	// background
 	unsigned int desertImageID;
 	unsigned int bulletImageID;
+	// variable for the first bosses ID
+	unsigned int firstBossID;
 
 	// bullet
 	//Bullet* bullet;
