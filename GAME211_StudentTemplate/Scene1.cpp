@@ -38,10 +38,10 @@ bool Scene1::OnCreate() {
 	firstBossID = ResourceManager::getInstance()->AddImage(game, "Art/FirstBoss.png");
 
 	// Add the call of dinosaurs ability from file
-	callOfDinosaursID = ResourceManager::getInstance()->AddImage(game, "Test.png");
+	callOfDinosaursID = ResourceManager::getInstance()->AddImage(game, "Art/CallOfDinosaurs.png");
 
 	// Add the tail strike ability from file
-	tailStrikeID = ResourceManager::getInstance()->AddImage(game, "Test2.png");
+	tailStrikeID = ResourceManager::getInstance()->AddImage(game, "Art/TailStrike.png");
 
 	// Set player image to PacMan
 	SDL_Surface* image;
