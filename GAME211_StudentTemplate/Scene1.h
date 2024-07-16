@@ -22,6 +22,11 @@ private:
 	// variable for the first bosses ID
 	unsigned int firstBossID;
 
+	// variable for the call of the dinosaurs ability
+	unsigned int callOfDinosaursID;
+	// variable for the tail strike ability 
+	unsigned int tailStrikeID;
+
 	// bullet
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;

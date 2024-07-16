@@ -37,6 +37,12 @@ bool Scene1::OnCreate() {
 	// Add the first boss image from file
 	firstBossID = ResourceManager::getInstance()->AddImage(game, "Art/FirstBoss.png");
 
+	// Add the call of dinosaurs ability from file
+	callOfDinosaursID = ResourceManager::getInstance()->AddImage(game, "Test.png");
+
+	// Add the tail strike ability from file
+	tailStrikeID = ResourceManager::getInstance()->AddImage(game, "Test2.png");
+
 	// Set player image to PacMan
 	SDL_Surface* image;
 	SDL_Texture* texture;
@@ -109,11 +115,25 @@ void Scene1::Render() {
 	float firstBossX = 0.2f;
 	float firstBossY = 0.22f;
 
+	// Declare variable for call of dino ability scale
+	float Ability1X = 0.3;
+	float Ability1Y = 0.3;
+
+	// variable for the tail strike ability scale
+	float Ability2X = 0.1;
+	float Ability2Y = 0.1;
+
 	// background image
 	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
 
 	// first boss image 
 	ResourceManager::getInstance()->RenderImage(game, firstBossID, Vec3(17.5f, 7.5f, 0), Vec3(firstBossX, firstBossY, 0.0f));
+
+	// call of dinosaurs ability image
+	ResourceManager::getInstance()->RenderImage(game, callOfDinosaursID, Vec3(17.5f, 5.5f, 0), Vec3(Ability1X, Ability1Y, 0.0f));
+
+	// tail strike ability image
+	ResourceManager::getInstance()->RenderImage(game, tailStrikeID, Vec3(17.5f, 5.5f, 0), Vec3(Ability2X, Ability2Y, 0.0f));
 
 
 	for (Bullet* bullet : bullets) {
