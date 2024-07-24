@@ -178,8 +178,6 @@ void GameManager::RenderPlayer(float scale)
 
 void GameManager::LoadScene( int i )
 {
-    std::cout << "Scene changing" << std::endl;
-
     // cleanup of current scene before loading another one
     currentScene->OnDestroy();
     delete currentScene;
