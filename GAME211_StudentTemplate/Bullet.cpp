@@ -11,10 +11,8 @@ Bullet::~Bullet(){
 	delete body;
 }
 
-void Bullet::Render(GameManager* game){
-	float gunScaleX = 0.04f;
-	float gunScaleY = 0.04f;
-	ResourceManager::getInstance()->RenderImage(game, imageId, body->getPos(), Vec3(gunScaleX, gunScaleY, 0.0f), angle);
+void Bullet::Render(GameManager* game, Vec3 scale){
+	ResourceManager::getInstance()->RenderImage(game, imageId, body->getPos(), Vec3(scale.x, scale.y, 0.0f), angle);
 	
 	if (game->isColliderDisplay()) {
 		// render collider

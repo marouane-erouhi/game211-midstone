@@ -16,7 +16,7 @@ public:
 	Bullet(unsigned int imageId_, float radius_);
 	~Bullet();
 
-	void Render(GameManager* game);
+	void Render(GameManager* game, Vec3 scale=Vec3(0.04, 0.04,0));
 	void Update(float deltaTime_);
 	void setDir(Vec3 dir_);
 	void setPos(Vec3 pos_);
