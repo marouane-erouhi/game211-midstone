@@ -34,7 +34,7 @@ bool CollisionTestScene::OnCreate() {
 
 	col1.pos = Vec3(12, 7, 0);
 	col2.pos = Vec3();
-	col1.radius = col2.radius = 25.0f;
+	col1.radius = col2.radius = 1.0f;
 
 	return true;
 }
@@ -45,8 +45,13 @@ void CollisionTestScene::Update(const float deltaTime) {
 
 	col2.pos = mouse.getGameCoords(game);
 
-	if (Collision::Circle_Circle_Collision(col1, col2)) {
-		cout << "collision" << endl;
+	if (Collision::Circle_Circle_Collision(col1, col2, game)) {
+		//cout << "collision" << endl;
+		color = Vec4(255, 0, 255, 255);
+	}
+	else {
+		color = Vec4(0, 255, 0, 255);
+
 	}
 
 }
@@ -56,8 +61,8 @@ void CollisionTestScene::Render() {
 	SDL_RenderClear(renderer);
 
 
-	col1.Render(game);
-	col2.Render(game);
+	col1.Render(game, color);
+	col2.Render(game, color);
 
 	SDL_RenderPresent(renderer);
 }

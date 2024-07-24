@@ -1,12 +1,18 @@
 #pragma once
-#include <MMath.h>
 #include "GameManager.h"
-using namespace MATH;
 
+struct Util {
+	static Vec3 GameToScreenCoords(Vec3 a, GameManager* game) {
+		return game->getProjectionMatrix() * a;
+	}
+	static Vec3 GameToScreenCoords(float a, GameManager* game) {
+		return game->getProjectionMatrix() * Vec3(a,a,a);
+	}
 
-Vec3 GameToScreenCoords(Vec3 vec, GameManager* game){
-    // game to screen coords
-    return game->getProjectionMatrix() * vec;
-}
-
-//Vec3
+	static Vec3 ScreentoGameCoords(Vec3 a, GameManager* game) {
+		return MMath::inverse(game->getProjectionMatrix()) * a;
+	}
+	static Vec3 ScreentoGameCoords(float a, GameManager* game) {
+		return MMath::inverse(game->getProjectionMatrix()) * Vec3(a,a,a);
+	}
+};

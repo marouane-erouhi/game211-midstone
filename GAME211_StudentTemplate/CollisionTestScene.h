@@ -19,7 +19,7 @@ private:
 	Mouse mouse;
 
 	CircleCollider col1, col2;
-
+	Vec4 color = Vec4(0,255,0,255);
 
 public:
 	// This constructor may be different from what you've seen before
