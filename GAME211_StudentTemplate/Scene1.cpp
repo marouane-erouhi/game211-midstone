@@ -32,7 +32,7 @@ bool Scene1::OnCreate() {
 
 	// Add desert image from file
 	desertImageID = ResourceManager::getInstance()->AddImage(game, "Art/Desert.png");
-	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet.png");
+	bulletImageID = ResourceManager::getInstance()->AddImage(game, "Art/Bullet Scaled.PNG");
 
 	// Add the first boss image from file
 	firstBossID = ResourceManager::getInstance()->AddImage(game, "Art/FirstBoss.png");
@@ -74,7 +74,7 @@ void Scene1::Update(const float deltaTime) {
 			Vec3 dir(m.x - playerPos.x, m.y - playerPos.y, 0);
 
 			// create bullet
-			Bullet* b = new Bullet(bulletImageID, 25.0f);
+			Bullet* b = new Bullet(bulletImageID, 0.6f);
 			// offset slighly infrot of the player
 			b->setPos(playerPos + VMath::normalize(dir) * 2.50f);
 			b->setDir(dir);// speed
@@ -83,7 +83,7 @@ void Scene1::Update(const float deltaTime) {
 		}
 	}
 
-
+	// bullets update
 	for (int i = bullets.size() - 1; i >= 0; --i) {
 		Bullet* bullet = bullets.at(i);
 		if (bullet->OutOfBounds(xAxis, yAxis)) {

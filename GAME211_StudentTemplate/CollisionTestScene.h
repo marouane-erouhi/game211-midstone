@@ -18,8 +18,15 @@ private:
 
 	Mouse mouse;
 
-	CircleCollider col1, col2;
+	CircleCollider static_coll, mouseColl;
 	Vec4 color = Vec4(0,255,0,255);
+
+
+	Bullet* bullet;
+	float bullet_radius = 1;
+
+	CircleCollider test_collider;
+
 
 public:
 	// This constructor may be different from what you've seen before

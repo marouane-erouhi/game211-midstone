@@ -7,7 +7,12 @@ struct CircleCollider {
 	float radius;
 	Vec3 pos;
 
-	void Render(GameManager* game, Vec4 color) {
+	CircleCollider(Vec3 pos = Vec3(), float radius = 1.0f) : pos(pos), radius(radius) {}
+
+	/// This is for debuging only, rendering should be done inside the 
+	/// object that owns this, since this pos is supposed to be reletive 
+	/// to the pos of the parent
+	void Render(GameManager* game, Vec4 color = Vec4(0,255,0,255)) {
 		Shapes::DrawCircle(game, pos, radius, color);
 	}
 };

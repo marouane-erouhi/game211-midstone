@@ -24,6 +24,7 @@ private:
 	bool isRunning;
 	class Scene *currentScene;
 	bool debug = true;
+	bool isCollisionDisplayed = true;
 
 	// This might be unfamiliar
     class PlayerBody *player;
@@ -48,6 +49,7 @@ public:
 	void RenderPlayer(float scale = 1.0f);
 	SDL_Renderer* getRenderer();
 	bool isDebug() { return debug; }
+	bool isColliderDisplay() { return isCollisionDisplayed; }
 
 	void Run();
     

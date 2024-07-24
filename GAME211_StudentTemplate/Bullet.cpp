@@ -2,8 +2,9 @@
 
 Bullet::Bullet(unsigned int imageId_, float radius_){
 	body = new Body();
-	body->setRadius(radius_);
+	//body->setRadius(radius_);
 	imageId = imageId_;
+	collider = CircleCollider(Vec3(), radius_);
 }
 
 Bullet::~Bullet(){
@@ -14,6 +15,11 @@ void Bullet::Render(GameManager* game){
 	float gunScaleX = 0.04f;
 	float gunScaleY = 0.04f;
 	ResourceManager::getInstance()->RenderImage(game, imageId, body->getPos(), Vec3(gunScaleX, gunScaleY, 0.0f), angle);
+	
+	if (game->isColliderDisplay()) {
+		// render collider
+		Shapes::DrawCircle(game, body->getPos() + collider.pos, collider.radius);
+	}
 }
 
 void Bullet::Update(float deltaTime_){
@@ -34,4 +40,13 @@ bool Bullet::OutOfBounds(float xAxis, float yAxis){
 	if (pos.x > xAxis || pos.x < -xAxis || pos.y > yAxis || pos.y < -yAxis)
 		return true;
 	return false;
+}
+
+CircleCollider Bullet::getCollider_Absolute() {
+	CircleCollider coll = CircleCollider();
+	coll.pos = collider.pos + body->getPos();
+	return coll;
+}
+void Bullet::setCollider(CircleCollider coll) {
+	collider = coll;
 }

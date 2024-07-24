@@ -30,11 +30,24 @@ bool CollisionTestScene::OnCreate() {
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);
 
+	bullet = new Bullet(ResourceManager::getInstance()->AddImage(game, "Art/Bullet Scaled.PNG"), 0.6f);
+	bullet->setPos(Vec3(5, 7, 0));
+	// collider reletive pos for the non centered bullet sprite: Vec3(0.2, 0.1, 0)
 	
+	
+	test_collider.pos = Vec3(5, 7, 0);
+	test_collider.radius = 0.6;
 
-	col1.pos = Vec3(12, 7, 0);
-	col2.pos = Vec3();
-	col1.radius = col2.radius = 1.0f;
+
+
+
+
+
+
+	/// Mouse testing
+	static_coll.pos = Vec3(12, 7, 0);
+	mouseColl.pos = Vec3();
+	static_coll.radius = mouseColl.radius = 1.0f;
 
 	return true;
 }
@@ -43,10 +56,9 @@ void CollisionTestScene::OnDestroy() {}
 
 void CollisionTestScene::Update(const float deltaTime) {
 
-	col2.pos = mouse.getGameCoords(game);
+	mouseColl.pos = mouse.getGameCoords(game);
 
-	if (Collision::Circle_Circle_Collision(col1, col2, game)) {
-		//cout << "collision" << endl;
+	if (Collision::Circle_Circle_Collision(static_coll, mouseColl, game)) {
 		color = Vec4(255, 0, 255, 255);
 	}
 	else {
@@ -57,12 +69,16 @@ void CollisionTestScene::Update(const float deltaTime) {
 }
 
 void CollisionTestScene::Render() {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
 	SDL_RenderClear(renderer);
 
 
-	col1.Render(game, color);
-	col2.Render(game, color);
+	static_coll.Render(game, color);
+	mouseColl.Render(game, color);
+
+	bullet->Render(game);
+
+	test_collider.Render(game, Vec4(255,0,255,255));
 
 	SDL_RenderPresent(renderer);
 }
@@ -70,5 +86,31 @@ void CollisionTestScene::Render() {
 void CollisionTestScene::HandleEvents(const SDL_Event& event)
 {
 	mouse.update(event);
+
+	// used for adjusting the collider size and position at runtime
+	if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
+		switch (event.key.keysym.scancode) {
+		case SDL_SCANCODE_RIGHT:
+			test_collider.pos.x += 0.1;
+			break;
+		case SDL_SCANCODE_LEFT:
+			test_collider.pos.x -= 0.1;
+			break;
+		case SDL_SCANCODE_UP:
+			test_collider.pos.y += 0.1;
+			break;
+		case SDL_SCANCODE_DOWN:
+			test_collider.pos.y -= 0.1;
+			break;
+
+		case SDL_SCANCODE_EQUALS:// plus
+			test_collider.radius += 0.1;
+			break;
+		case SDL_SCANCODE_MINUS:// minus
+			test_collider.radius -= 0.1;
+			break;
+		}
+		cout << "pos: " << test_collider.pos.x << " - " << test_collider.pos.y << "\tradius: " << test_collider.radius << endl;
+	}
 
 }

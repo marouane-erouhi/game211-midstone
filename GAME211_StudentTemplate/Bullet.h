@@ -9,6 +9,7 @@ class Bullet {
 	float speed = 3.0f;
 	float angle = 0.0f;
 
+	// location reletive to parent location
 	CircleCollider collider;
 
 public:
@@ -21,4 +22,6 @@ public:
 	void setPos(Vec3 pos_);
 	bool OutOfBounds(float xAxis, float yAxis);
 	Body* getBody() { return body; }
+	CircleCollider getCollider_Absolute();
+	void setCollider(CircleCollider coll);
 };
