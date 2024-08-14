@@ -5,6 +5,9 @@
 #include "Scene.h"
 #include "Mouse.h"
 #include "Bullet.h"
+#include "Boss1.h"
+#include "CallOfDinosaurs.h"
+#include "TailStrike.h"
 
 using namespace MATH;
 class Scene1 : public Scene {
@@ -34,6 +37,12 @@ private:
 	float bullet_timeSinceLastFire = 0.0f;
 
 	Mouse mouse;
+
+	Boss1* boss1;
+	CallOfDinosaurs* callOfDinosaurs;
+	TailStrike* tailStrike;
+
+	std::vector<GameObject*> enemyProjectiles;
 
 public:
 	// This constructor may be different from what you've seen before

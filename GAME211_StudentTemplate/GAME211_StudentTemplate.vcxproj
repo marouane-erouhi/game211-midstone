@@ -27,15 +27,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Body.h" />
+    <ClInclude Include="Boss1.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CallOfDinosaurs.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionTestScene.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerBody.h" />
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene1.h" />
+    <ClInclude Include="TailStrike.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UtilityFunctions.h" />
     <ClInclude Include="Window.h" />
@@ -45,6 +49,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionTestScene.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerBody.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

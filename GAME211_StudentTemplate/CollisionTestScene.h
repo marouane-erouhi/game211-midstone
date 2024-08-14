@@ -22,8 +22,6 @@ private:
 	Vec4 color = Vec4(0,255,0,255);
 
 
-	Bullet* bullet;
-	float bullet_radius = 1;
 
 	CircleCollider test_collider;
 

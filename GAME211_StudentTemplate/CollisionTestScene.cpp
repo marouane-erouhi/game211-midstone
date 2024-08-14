@@ -30,10 +30,9 @@ bool CollisionTestScene::OnCreate() {
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);
 
-	bullet = new Bullet(ResourceManager::getInstance()->AddImage(game, "Art/Bullet Scaled.PNG"), 0.6f);
-	bullet->setPos(Vec3(5, 7, 0));
 	// collider reletive pos for the non centered bullet sprite: Vec3(0.2, 0.1, 0)
 	
+
 	
 	test_collider.pos = Vec3(5, 7, 0);
 	test_collider.radius = 0.6;
@@ -76,7 +75,6 @@ void CollisionTestScene::Render() {
 	static_coll.Render(game, color);
 	mouseColl.Render(game, color);
 
-	bullet->Render(game);
 
 	test_collider.Render(game, Vec4(255,0,255,255));
 
