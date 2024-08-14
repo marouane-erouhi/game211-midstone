@@ -9,9 +9,11 @@ protected:
 	GameManager* game;
 	Body* body;
 	unsigned int imageId;
+
+	// location reletive to parent location
 	std::vector<CircleCollider*> coliders;
 
-	float speed;
+	float speed = 3.0;
 	float angle = 0.0f;
 	Vec3 scale = Vec3(0.2, 0.22, 0.0);
 
@@ -19,49 +21,12 @@ protected:
 
 public:
 	GameObject(GameManager* game);
+	~GameObject();
 
 	void Render();
-	void Update(float deltaTime) {
-		body->Update(deltaTime);
-	}
+	void Update(float deltaTime);
 
-	void setPos(Vec3 pos_) {
-		body->setPos(pos_);
-	}
-    void HandleEvents(const SDL_Event& event) {
-        // used for debugging 
-        if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
-            switch (event.key.keysym.scancode) {
-            case SDL_SCANCODE_W:
-                body->vel.y = 1 * maxSpeed;
-                break;
-            case SDL_SCANCODE_A:
-                body->vel.x = -1 * maxSpeed;
-                break;
-            case SDL_SCANCODE_S:
-                body->vel.y = -1 * maxSpeed;
-                break;
-            case SDL_SCANCODE_D:
-                body->vel.x = 1 * maxSpeed;
-                break;
-            }
-        }
-
-        if (event.type == SDL_KEYUP && event.key.repeat == 0) {
-            switch (event.key.keysym.scancode) {
-            case SDL_SCANCODE_W:
-                body->vel.y = 0;
-                break;
-            case SDL_SCANCODE_A:
-                body->vel.x = 0;
-                break;
-            case SDL_SCANCODE_S:
-                body->vel.y = 0;
-                break;
-            case SDL_SCANCODE_D:
-                body->vel.x = 0;
-                break;
-            }
-        }
-    }
+    void setPos(Vec3 pos_);
+	void HandleEvents(const SDL_Event& event);
+    void setDir(Vec3 dir_);
 };

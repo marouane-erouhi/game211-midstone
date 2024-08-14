@@ -24,7 +24,7 @@ private:
 
 
 	CircleCollider test_collider;
-
+	float imageId;
 
 public:
 	// This constructor may be different from what you've seen before

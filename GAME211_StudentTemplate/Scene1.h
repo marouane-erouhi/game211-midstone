@@ -21,17 +21,8 @@ private:
 
 	// background
 	unsigned int desertImageID;
-	unsigned int bulletImageID;
-	// variable for the first bosses ID
-	unsigned int firstBossID;
 
-	// variable for the call of the dinosaurs ability
-	unsigned int callOfDinosaursID;
-	// variable for the tail strike ability 
-	unsigned int tailStrikeID;
-
-	// bullet
-	//Bullet* bullet;
+	//bullets
 	std::vector<Bullet*> bullets;
 	float bulletCooldown = 0.25f;
 	float bullet_timeSinceLastFire = 0.0f;

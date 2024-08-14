@@ -40,6 +40,7 @@ bool CollisionTestScene::OnCreate() {
 
 
 
+	imageId = ResourceManager::getInstance()->AddImage(game, "Art/Bullet Scaled.PNG");
 
 
 
@@ -74,6 +75,8 @@ void CollisionTestScene::Render() {
 
 	static_coll.Render(game, color);
 	mouseColl.Render(game, color);
+
+	ResourceManager::getInstance()->RenderImage(game, imageId, Vec3(10,7,1), Vec3(0.06, 0.06, 0.06));
 
 
 	test_collider.Render(game, Vec4(255,0,255,255));
