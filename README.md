@@ -1,5 +1,11 @@
 # game211-midstone
 
+View/Hide debug shapes:
+| Key | Function |
+| --- | --- |
+| `F1` | Toggle **image** debug borders |
+| `F2` | Toggle **collider** debug borders |
+
 ## Using Images
 You can import an image and render it using the `ResourceManager` utility class
 Example:

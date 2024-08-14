@@ -124,8 +124,11 @@ void GameManager::handleEvents()
             case SDL_SCANCODE_DELETE:
                 isRunning = false;
                 break;
-            case SDL_SCANCODE_GRAVE:
+            case SDL_SCANCODE_F1:
                 debug = !debug;
+                break;
+            case SDL_SCANCODE_F2:
+                isCollisionDisplayed = !isCollisionDisplayed;
                 break;
             case SDL_SCANCODE_1:
                 LoadScene(1);
