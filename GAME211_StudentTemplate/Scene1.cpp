@@ -95,22 +95,23 @@ void Scene1::Update(const float deltaTime) {
 
 	// Update player
 	game->getPlayer()->Update(deltaTime);
+	tailStrike->Update(deltaTime);
 }
 
 void Scene1::Render() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 
-	// Declare variables for desert's scale
-	float desertScaleX = 1000 / 967;
-	float desertScaleY = 600 / 580;
-
 	// Declare variables for the gun's scale
 	float gunScaleX = 0.04f;
 	float gunScaleY = 0.04f;
 
 	// background image
-	ResourceManager::getInstance()->RenderImage(game, desertImageID, Vec3(12.5f, 7.5f, 0), Vec3(desertScaleX, desertScaleY, 0.0f));
+	ResourceManager::getInstance()->RenderImage(game, 
+		desertImageID, 
+		Vec3(12.5f, 7.5f, 0), 
+		Vec3(1000 / 967, 600 / 580, 0.0f)
+	);
 
 	tailStrike->Render();
 	callOfDinosaurs->Render();
@@ -122,9 +123,7 @@ void Scene1::Render() {
 		Shapes::DrawCircle(game, body->getPos(), body->getRadius());
 	}
 	
-	Vec3 playerScreenCoords = projectionMatrix * game->getPlayer()->getPos();
-
-	SDL_RenderDrawLine(renderer, mouse.x,mouse.y, playerScreenCoords.x, playerScreenCoords.y);
+	Vec3 playerScreenCoords = Util::GameToScreenCoords(game->getPlayer()->getPos(), game);
 	
 	// render the player
 	game->RenderPlayer(0.10f);
